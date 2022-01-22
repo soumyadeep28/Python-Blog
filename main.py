@@ -14,6 +14,10 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/post')
+def post():
+    return render_template('post.html')
+
 
 
 
