@@ -4,7 +4,8 @@
         "local_uri" : "mysql://root:@localhost/squarecube" ,
         "prod_uri" : "mysql://root:@localhost/squarecube" ,
         "mailuser" : "soumya.sen.001.gupta@gmail.com",
-        "mailpasswd" : "C0mmunication@01"
+        "mailpasswd" : "C0mmunication@01",
+        "num_of_post" : 5 
 
 
     }

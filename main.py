@@ -48,6 +48,17 @@ class Contact(db.Model):
     date = db.Column(db.String(80), nullable=False)
 
 
+#----- class for post db--------
+
+class Posts(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80),  nullable=False)
+    slug = db.Column(db.String(120), nullable=False)
+    content = db.Column(db.String(80), nullable=False)
+    date = db.Column(db.String(80), nullable=False)
+    img_file = db.Column(db.String(80), nullable=False)
+
+
 
 #----------- Routing configuration and the values are passed
 
@@ -82,10 +93,12 @@ def contact():
     
     return render_template('contact.html')
 
-@app.route('/post' )
-def post():
+@app.route('/post/<string:post_slug>' , methods = ['POST' , 'GET'] )
+def post_route(post_slug):
+    post = Posts.query.filter_by(slug = post_slug).first()
 
-    return render_template('post.html')
+
+    return render_template('post.html' , post=post)
 
 
 
