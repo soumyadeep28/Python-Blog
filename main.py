@@ -1,12 +1,38 @@
 from flask import Flask , render_template ,request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import json
+from flask_mail import Mail  #this is to import mailing feature 
 
+#defining the application
 app = Flask(__name__)
 
 
+#loading all the data as json file 
+with open("config.json" , 'r') as c:
+
+    params = json.load(c)["params"]
+
+#----------configure for mailing fitures in gmail
+app.config.update(
+    MAIL_SERVER = 'smtp.gmail.com' ,
+    MAIL_PORT = '465',
+    MAIL_USE_SSL = True ,
+    MAIL_USER = params['mailuser'] ,
+    MAIL_PASSWORD = params['mailpasswd'],
+    
+
+)
+mail = Mail(app)
 #-------- connecting with db------------
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/squarecube'
+
+local_server = True
+if local_server :
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
+
+    
 db = SQLAlchemy(app)
 
 
@@ -43,8 +69,15 @@ def contact():
         massage = request.form.get('massage')
         entry = Contact(name =name ,phone =phone , email = email , msg = massage , date = datetime.now())
         db.session.add(entry)
-
         db.session.commit()
+        '''
+        mail.send_message('New msg from Blog from '  + name , 
+                            sender = email , 
+                            recipients = [params['mailuser'] ] ,
+                            body = massage +'\n Phone number :' + phone 
+
+                            )
+        '''
 
     
     return render_template('contact.html')

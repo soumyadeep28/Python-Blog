@@ -1,0 +1,11 @@
+{
+    "params": {
+        "local_server" : "True" ,
+        "local_uri" : "mysql://root:@localhost/squarecube" ,
+        "prod_uri" : "mysql://root:@localhost/squarecube" ,
+        "mailuser" : "soumya.sen.001.gupta@gmail.com",
+        "mailpasswd" : "C0mmunication@01"
+
+
+    }
+}
