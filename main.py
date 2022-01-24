@@ -1,4 +1,4 @@
-from flask import Flask , render_template ,request
+from flask import Flask , render_template ,request , session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
@@ -7,6 +7,8 @@ from flask_mail import Mail  #this is to import mailing feature
 #defining the application
 app = Flask(__name__)
 
+#setting up secret key
+app.config['SECRET_KEY'] = "Your_secret_string"
 
 #loading all the data as json file 
 with open("config.json" , 'r') as c:
@@ -67,9 +69,28 @@ def home():
     posts = Posts.query.filter_by().all()[0:params['num_of_post']]
     return render_template('index.html' , posts= posts)
 
-@app.route('/dashboard')
+@app.route('/dashboard' , methods=["GET" , "POST"])
 def dashboard():
-    return render_template('login.html' )
+
+
+    #check if user is already in session or not
+    if 'user' in session and session['user'] == params['admin_user'] :
+        posts = Posts.query.all()
+        return render_template('dashboard.html' ,params = params ,posts = posts )
+    #this is for the new login and create the session
+    if request.method == "POST":
+        user = request.form.get('uname')
+        password = request.form.get('pswd')
+
+        if user == params['admin_user']  and password == params['admin_pass'] :
+            #set the session variable
+            session['user'] = user
+            posts = Posts.query.all()
+            return render_template('dashboard.html' , params = params  ,posts = posts)
+        #go to admin panel
+        pass
+    else:
+        return render_template('login.html' ,params = params )
 @app.route('/about')
 def about():
     return render_template('about.html')

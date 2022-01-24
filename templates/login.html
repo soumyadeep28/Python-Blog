@@ -15,13 +15,13 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin">
+  <form class="form-signin" action="/dashboard" method="POST">
     <img class="mb-4" src="{{ url_for('static' , filename = 'favicon.ico') }}" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <h1 class="h3 mb-3 font-weight-normal">Admin Login</h1>
+    <label for="inputEmail" class="sr-only">User name</label>
+    <input type="text" id="inputEmail" name="uname" class="form-control" placeholder="User Name" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input type="password" name="pswd" id="inputPassword" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
