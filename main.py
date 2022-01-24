@@ -178,5 +178,16 @@ def logout():
     session.pop('user')
     return redirect('/dashboard')
 
+
+@app.route('/delete/<string:sno>' ,methods= ['GET' , 'POST'] )
+def delete(sno):
+    if 'user' in session and session['user']== params['admin_user']: #to check logged in or not
+        
+        post =Posts.query.filter_by(sno = sno).first()
+        db.session.delete(post)
+        db.session.commit()
+    return redirect('/dashboard')
+
+
 #------- to run the flask application----------
 app.run(debug=True)
