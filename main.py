@@ -67,6 +67,9 @@ def home():
     posts = Posts.query.filter_by().all()[0:params['num_of_post']]
     return render_template('index.html' , posts= posts)
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('login.html' )
 @app.route('/about')
 def about():
     return render_template('about.html')
