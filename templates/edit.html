@@ -15,6 +15,7 @@
     </div>
 </header>
         <!-- Main Content-->
+        
         <div class="container">
             <h3> Edit or Insert </h3>
         </div>
@@ -22,24 +23,26 @@
             <div class="row gx-1 gx-lg-8 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
-                    <form id="contactForm" method="POST">
+                    <form id="contactForm" method="POST" action="/edit/{{post.sno}}" >
                         <div class="form-floating">
-                            <input class="form-control" name="title" id="name" type="text" placeholder="Enter Title..." data-sb-validations="required" />
+                            <input class="form-control" name="title" id="name" type="text" placeholder="Enter Title..." data-sb-validations="required" value="{{post.title}}"/>
                             <label for="name">Title</label>
                             <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control" name="slug" id="slug" type="text" placeholder="Enter your Slug..." data-sb-validations="required,email" />
+                            <input class="form-control" name="slug" id="slug" type="text" placeholder="Enter your Slug..." data-sb-validations="required,email" value="{{post.slug}}" />
                             <label for="email">slug</label>
                             <div class="invalid-feedback" data-sb-feedback="email:required">An slug is required.</div>
                             <div class="invalid-feedback" data-sb-feedback="email:email">slug is not valid.</div>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control" name="img" id="img" type="text" placeholder="Enter your image..." data-sb-validations="required" />                            <label for="img">Image file</label>
+                            <input class="form-control" name="img" id="img" type="text" placeholder="Enter your image..." data-sb-validations="required" value="{{post.img_file}}" />                            
+                            <label for="img">Image file</label>
                             <div class="invalid-feedback" data-sb-feedback="image:required">A Image is required.</div>
                         </div>
                         <div class="form-floating">
-                            <textarea class="form-control" name ="content" id="content" placeholder="Enter your Content here..." style="height: 12rem" data-sb-validations="required"></textarea>                            <label for="phone">Content</label>
+                            <textarea class="form-control" name ="content" id="content" placeholder="Enter your Content here..." style="height: 12rem" data-sb-validations="required"  > {{ post.content}}</textarea>                            
+                            <label for="phone">Content</label>
                             <div class="invalid-feedback" data-sb-feedback="Content:required">Content is required.</div>
                         </div>
                         <br />

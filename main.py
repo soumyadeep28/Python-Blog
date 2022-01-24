@@ -1,4 +1,4 @@
-from flask import Flask , render_template ,request , session
+from flask import Flask, redirect , render_template ,request , session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
@@ -142,9 +142,19 @@ def edit(sno):
                 post = Posts(title = box_title , slug =box_slug ,content = box_content , img_file = box_img , date = datetime.now() )
                 db.session.add(post)
                 db.session.commit()
+                return redirect('/edit/'+ sno )
+            else:
+                post = Posts.query.filter_by(sno = sno).first()
+                post.title = box_title
+                post.slug = box_slug
+                post.content = box_content
+                post.img_file = box_img
+                post.date = datetime.now()
+                db.session.commit()
+                return redirect('/edit/'+ sno )
 
-
-        return render_template('edit.html' , params = params)
+        post = Posts.query.filter_by(sno = sno).first()
+        return render_template('edit.html' , params = params , post = post)
 
 
 #------- to run the flask application----------
