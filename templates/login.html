@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Signin </title>
 <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
 <link href="{{ url_for('static' , filename='css/core-bootstrap.css') }} " rel="stylesheet">
@@ -15,6 +15,10 @@
 </head>
 
 <body class="text-center">
+  <div class="container">
+
+  
+  
   <form class="form-signin" action="/dashboard" method="POST">
     <img class="mb-4" src="{{ url_for('static' , filename = 'favicon.ico') }}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Admin Login</h1>
@@ -28,8 +32,11 @@
       </label>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    <hr>
+    
+    
   </form>
-
+  <a href="/"><button class="btn btn-lg btn-primary " >Home</button></a>
+</div>
 </body>
 </html>
