@@ -29,6 +29,11 @@
             <a href="/edit/0"><button class="btn btn-primary text-uppercase"> Add New Post </button></a>
             <a href="/logout"><button class="btn btn-primary text-uppercase">Logout</button></a>
             <hr>
+                  <p>Upload a file and map the file with the posts</p>
+            <form action="/uploader" method="POST" enctype="multipart/form-data">
+                <input  type="file" name="file1" id="file">
+                <button class="btn btn-primary text-uppercase" type="submit">Upload</button>
+            </form>
                     <!-- Post preview-->
                     
                     <table class="table">

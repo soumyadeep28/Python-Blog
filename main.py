@@ -3,17 +3,24 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
 from flask_mail import Mail  #this is to import mailing feature 
-
+import os 
+from werkzeug.utils  import secure_filename   #to secure files
 #defining the application
 app = Flask(__name__)
 
 #setting up secret key
 app.config['SECRET_KEY'] = "Your_secret_string"
 
+
 #loading all the data as json file 
 with open("config.json" , 'r') as c:
 
     params = json.load(c)["params"]
+
+
+#setting up path for file upload 
+app.config['UPLOAD_FOLDER'] = params['location']
+
 
 #----------configure for mailing fitures in gmail
 app.config.update(
@@ -156,6 +163,14 @@ def edit(sno):
 
         post = Posts.query.filter_by(sno = sno).first()
         return render_template('edit.html' , params = params , post = post)
+
+@app.route('/uploader' , methods = ['POST' ,'GET'])
+def uploader():
+    if 'user' in session and session['user']== params['admin_user']: #to check logged in or not
+        if(request.method == 'POST'):
+            f =request.files['file1']
+            f.save( os.path.join(app.config['UPLOAD_FOLDER'] ,secure_filename(f.filename)))
+            return 'Uploaded Successfully'
 
 
 #------- to run the flask application----------
