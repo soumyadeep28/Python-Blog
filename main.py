@@ -173,5 +173,10 @@ def uploader():
             return 'Uploaded Successfully'
 
 
+@app.route('/logout' )
+def logout():
+    session.pop('user')
+    return redirect('/dashboard')
+
 #------- to run the flask application----------
 app.run(debug=True)

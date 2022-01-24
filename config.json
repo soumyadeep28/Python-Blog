@@ -8,7 +8,7 @@
         "num_of_post" : 5 ,
         "admin_user" : "admin",
         "admin_pass" : "Welcome@123",
-        "location" : "D:\\Practice\\Python\\codingwithHarry-Flask\\basicblogpost"
+        "location" : "D:\\Practice\\Python\\codingwithHarry-Flask\\basicblogpost\\static\\img"
 
 
     }
