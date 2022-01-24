@@ -5,7 +5,7 @@
         "prod_uri" : "mysql://root:@localhost/squarecube" ,
         "mailuser" : "soumya.sen.001.gupta@gmail.com",
         "mailpasswd" : "C0mmunication@01",
-        "num_of_post" : 5 ,
+        "num_of_post" : 3 ,
         "admin_user" : "admin",
         "admin_pass" : "Welcome@123",
         "location" : "D:\\Practice\\Python\\codingwithHarry-Flask\\basicblogpost\\static\\img"

@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
 from flask_mail import Mail  #this is to import mailing feature 
-import os 
+import os , math
 from werkzeug.utils  import secure_filename   #to secure files
 #defining the application
 app = Flask(__name__)
@@ -73,8 +73,30 @@ class Posts(db.Model):
 
 @app.route('/')
 def home():
-    posts = Posts.query.filter_by().all()[0:params['num_of_post']]
-    return render_template('index.html' , posts= posts)
+    posts = Posts.query.filter_by().all()
+    last = math.ceil(len(posts)/int(params['num_of_post']))
+    #[0:params['num_of_post']]
+    #Pagination Logic
+    page = request.args.get('page')
+    if (not str(page).isnumeric() ):
+        page = 1
+    page = int(page)
+    posts = posts[(page-1)*int(params['num_of_post']) : (page-1)*int(params['num_of_post'])+int(params['num_of_post'])]
+    if (page==1 ):
+        prev = "#"
+        next = "/?page="+ str(page+1)
+
+    elif page== last :
+        prev = "/?page="+ str(page-1)
+        next =  "#"
+    else:
+        next = "/?page="+ str(page+1)
+        prev = "/?page="+ str(page-1)
+
+
+
+    #posts = Posts.query.filter_by().all()[0:params['num_of_post']  ]
+    return render_template('index.html' , posts= posts , prev=prev , next= next )
 
 @app.route('/dashboard' , methods=["GET" , "POST"])
 def dashboard():
