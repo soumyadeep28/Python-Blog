@@ -126,6 +126,25 @@ def post_route(post_slug):
     return render_template('post.html' , post=post)
 
 
+@app.route('/edit/<string:sno>' , methods=['POST' ,'GET'] )
+def edit(sno):
+    if 'user' in session and session['user']== params['admin_user']:
+        if request.method == 'POST' :
+            box_title = request.form.get('title')
+            box_slug = request.form.get('slug')
+            box_content = request.form.get('content')
+            box_img = request.form.get('img')
+
+            ''' Check serial number is 0 or not if 0 then it is creating new post and 
+            if there is any other then it is editing'''
+
+            if sno == '0' :
+                post = Posts(title = box_title , slug =box_slug ,content = box_content , img_file = box_img , date = datetime.now() )
+                db.session.add(post)
+                db.session.commit()
+
+
+        return render_template('edit.html' , params = params)
 
 
 #------- to run the flask application----------
