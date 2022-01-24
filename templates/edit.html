@@ -16,12 +16,16 @@
 </header>
         <!-- Main Content-->
         
-        <div class="container">
-            <h3> Edit or Insert </h3>
-        </div>
+        
         <div class="container px-6 px-lg-2">
             <div class="row gx-1 gx-lg-8 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
+
+                    <h3> Edit or Insert </h3>
+                    <h5>Some Basic Operation</h5>
+                    <a href="/dashboard"><button class="btn btn-primary text-uppercase"> Dashboard </button></a>
+                    <a href="/logout"><button class="btn btn-primary text-uppercase">Logout</button></a>
+                    <hr>
                     <!-- Post preview-->
                     <form id="contactForm" method="POST" action="/edit/{{post.sno}}" >
                         <div class="form-floating">

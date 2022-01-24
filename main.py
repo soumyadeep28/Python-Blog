@@ -137,12 +137,13 @@ def edit(sno):
 
             ''' Check serial number is 0 or not if 0 then it is creating new post and 
             if there is any other then it is editing'''
-
+            
             if sno == '0' :
                 post = Posts(title = box_title , slug =box_slug ,content = box_content , img_file = box_img , date = datetime.now() )
+                print(post)
                 db.session.add(post)
                 db.session.commit()
-                return redirect('/edit/'+ sno )
+                
             else:
                 post = Posts.query.filter_by(sno = sno).first()
                 post.title = box_title
